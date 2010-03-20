@@ -21,11 +21,11 @@ class GUIWindow(wx.Frame):
         
         wx.Frame.__init__(self, parent, id, title = Title, pos = Pos, size = Size, style = Style)
         
-        #self.control = wx.Panel(self)
-        #labelInput = wx.StaticText()
-        #textResult = wx.TextCtrl(self, style=wx.TE_MULTILINE)
-        #labelResult
+        self.control = wx.Panel(self)
+        labelInput = wx.StaticText(self.control, -1, InputLabel)
         #textInput
+        #labelResult
+        #textResult = wx.TextCtrl(self, style=wx.TE_MULTILINE)
     
     def OnAbout(self, e):
         AboutMsg = "ed2k Link Converter \n in wxPython"
