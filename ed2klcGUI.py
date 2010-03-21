@@ -23,7 +23,7 @@ class GUIWindow(wx.Frame):
 		convertbtnlabel = 'Convert'
 		aboutbtnlabel = 'About'
 		exitbtulabel = 'Exit'
-		langchoices =['English (en)','正體中文 (zh-TW)'] 
+		langchoices = [u"English (en)"]#,u"正體中文 (zh-TW)"] 
 
 		Pos = wx.DefaultPosition
 		Size = (500,700)
