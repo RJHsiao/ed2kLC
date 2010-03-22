@@ -26,7 +26,7 @@ class GUIWindow(wx.Frame):
 		langchoices = [u"English (en)"]#,u"正體中文 (zh-TW)"] 
 
 		Pos = wx.DefaultPosition
-		Size = (500,700)
+		Size = (500,500)
 		Style = wx.MINIMIZE_BOX | wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX
 		#self.Icon = wx.Icon('icon', wx.BITMAP_TYPE_ICO)
 		#self.Icon.CopyFromBitmap(self,wx.Image('ed2klc.ico', wx.BITMAP_TYPE_ICO).ConvertToBitmap())
