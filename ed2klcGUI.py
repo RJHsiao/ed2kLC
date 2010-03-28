@@ -7,6 +7,7 @@
 
 ### Program Start
 import wx
+import ed2kConvert
 
 class GUIWindow(wx.Frame):
 	"""The GUI Window"""
@@ -42,26 +43,26 @@ class GUIWindow(wx.Frame):
 		## The area that contain input text box 
 		inputpanel = wx.Panel(mainpanel, -1)
 		inputbox = wx.StaticBoxSizer(wx.StaticBox(inputpanel, -1, inputlabel), orient = wx.VERTICAL)
-		inputtext = wx.TextCtrl(inputpanel, -1, size = (350, 150), style = wx.TE_MULTILINE)
-		inputbox.Add(inputtext, 0, wx.ALL, 5)
+		self.inputtext = wx.TextCtrl(inputpanel, -1, size = (350, 150), style = wx.TE_MULTILINE)
+		inputbox.Add(self.inputtext, 0, wx.ALL, 5)
 		inputpanel.SetSizer(inputbox)
 		mainbox.Add(inputpanel, 0, wx.EXPAND | wx.ALL, 5)
 
 		## The area that contain option radio boxs
 		optionpanel = wx.Panel(mainpanel, -1)
 		optionbox = wx.StaticBoxSizer(wx.StaticBox(optionpanel, -1, optionlabel), orient = wx.HORIZONTAL)
-		tagrb = wx.RadioBox(optionpanel, -1, label = taglabel, choices = tagchoices)
-		optionbox.Add(tagrb, 0, wx.ALL, 5)
-		formatrb = wx.RadioBox(optionpanel, -1, label = formatlabel, choices = formatchoices)
-		optionbox.Add(formatrb, 0, wx.ALL, 5)
+		self.tagrb = wx.RadioBox(optionpanel, -1, label = taglabel, choices = tagchoices)
+		optionbox.Add(self.tagrb, 0, wx.ALL, 5)
+		self.formatrb = wx.RadioBox(optionpanel, -1, label = formatlabel, choices = formatchoices)
+		optionbox.Add(self.formatrb, 0, wx.ALL, 5)
 		optionpanel.SetSizer(optionbox)
 		mainbox.Add(optionpanel, 0, wx.EXPAND | wx.ALL, 5)
 
 		## The area that contain result (output) text box
 		resultpanel = wx.Panel(mainpanel, -1)
 		resultbox = wx.StaticBoxSizer(wx.StaticBox(resultpanel, -1, resultlabel), orient = wx.VERTICAL)
-		resulttext = wx.TextCtrl(resultpanel, -1, size = (350, 150), style = wx.TE_MULTILINE)
-		resultbox.Add(resulttext, 0, wx.ALL, 5)
+		self.resulttext = wx.TextCtrl(resultpanel, -1, size = (350, 150), style = wx.TE_MULTILINE)
+		resultbox.Add(self.resulttext, 0, wx.ALL, 5)
 		resultpanel.SetSizer(resultbox)
 		mainbox.Add(resultpanel, 0, wx.EXPAND | wx.ALL, 5)
 
@@ -106,9 +107,13 @@ class GUIWindow(wx.Frame):
 		self.Centre()
 
 	def OnConvert(self, e):
-		dlg = wx.MessageDialog(self, 'Still Not Work!', 'Oops!', wx.OK)
-		dlg.ShowModal()
-		dlg.Destroy()
+		#dlg = wx.MessageDialog(self, message = ed2kConvert.ConvertLink(self.inputtext.GetLineText(0)), caption = 'Oops!', style = wx.OK)
+		#dlg = wx.MessageDialog(self, message = self.inputtext.GetLineText(0), caption = str(self.inputtext.GetNumberOfLines()), style = wx.OK)
+		#dlg.ShowModal()
+		#dlg.Destroy()
+		#
+		for i in  range(self.inputtext.GetNumberOfLines()):
+			self.resulttext.write(ed2kConvert.ConvertLink(self.inputtext.GetLineText(i)) + '\n')
 
 	def OnAbout(self, e):
 		""" Print Adout Dialog"""
