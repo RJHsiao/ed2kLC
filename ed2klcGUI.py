@@ -43,7 +43,7 @@ class GUIWindow(wx.Frame):
 		## The area that contain input text box 
 		inputpanel = wx.Panel(mainpanel, -1)
 		inputbox = wx.StaticBoxSizer(wx.StaticBox(inputpanel, -1, inputlabel), orient = wx.VERTICAL)
-		self.inputtext = wx.TextCtrl(inputpanel, -1, size = (350, 150), style = wx.TE_MULTILINE)
+		self.inputtext = wx.TextCtrl(inputpanel, -1, size = (350, 150), style = wx.TE_MULTILINE | wx.HSCROLL)
 		inputbox.Add(self.inputtext, 0, wx.ALL, 5)
 		inputpanel.SetSizer(inputbox)
 		mainbox.Add(inputpanel, 0, wx.EXPAND | wx.ALL, 5)
@@ -112,6 +112,7 @@ class GUIWindow(wx.Frame):
 		#dlg.ShowModal()
 		#dlg.Destroy()
 		#
+		self.resulttext.Clear()
 		for i in  range(self.inputtext.GetNumberOfLines()):
 			self.resulttext.write(ed2kConvert.ConvertLink(self.inputtext.GetLineText(i)) + '\n')
 

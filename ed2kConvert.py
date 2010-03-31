@@ -11,5 +11,7 @@ import re
 
 def ConvertLink(srclink, destype = '', utf8url = True):
 	#
+	if srclink == '':
+		return ''
 	filename = srclink.split('|')[2]
 	return unicode('<a href="' + srclink + '">' + urllib.unquote_plus(filename) + '</a>')
