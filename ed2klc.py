@@ -12,7 +12,7 @@
 import ed2klcGUI
 
 def main():
-    ed2klcGUI.RunGUI()
+	ed2klcGUI.RunGUI()
 
 if __name__ == "__main__":
-    main()
+	main()

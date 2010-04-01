@@ -13,24 +13,24 @@ class GUIWindow(wx.Frame):
 	"""The GUI Window"""
 	def __init__(self, parent, id):
 		## These variable are define for support multi-language in the future
-		Title = 'ed2k Link Converter'
-		inputlabel = 'Input Links'
-		optionlabel = 'Options'
-		taglabel = 'Tag Type'
-		tagchoices = ['HTML','BBcode','No Tag']
-		formatlabel = 'UTF-8 url format' + '?'
-		formatchoices = ['Yes','No']
-		resultlabel = 'Result Links'
-		convertbtnlabel = 'Convert'
-		aboutbtnlabel = 'About'
-		exitbtulabel = 'Exit'
-		langchoices = [u"English (en)"]#,u"正體中文 (zh-TW)"] 
+		Title = u'ed2k Link Converter'
+		inputlabel = u'Input Links'
+		optionlabel = u'Options'
+		taglabel = u'Tag Type'
+		tagchoices = [u'HTML',u'BBcode',u'No Tag']
+		formatlabel = u'UTF-8 url format' + u'?'
+		formatchoices = [u'Yes',u'No']
+		resultlabel = u'Result Links'
+		convertbtnlabel = u'Convert'
+		aboutbtnlabel = u'About'
+		exitbtulabel = u'Exit'
+		langchoices = [u'English (en)']#,u'正體中文 (zh-TW)'] 
 
 		Pos = wx.DefaultPosition
 		Size = (500,550)
 		Style = wx.MINIMIZE_BOX | wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX
-		#self.Icon = wx.Icon('icon', wx.BITMAP_TYPE_ICO)
-		#self.Icon.CopyFromBitmap(self,wx.Image('ed2klc.ico', wx.BITMAP_TYPE_ICO).ConvertToBitmap())
+		#self.Icon = wx.Icon(u'icon', wx.BITMAP_TYPE_ICO)
+		#self.Icon.CopyFromBitmap(self,wx.Image(u'ed2klc.ico', wx.BITMAP_TYPE_ICO).ConvertToBitmap())
 		wx.Frame.__init__(self, parent, id, title = Title, pos = Pos, size = Size, style = Style)
 
 		gobalpanel = wx.Panel(self, -1)
@@ -69,7 +69,7 @@ class GUIWindow(wx.Frame):
 		## The area that contain languade select combo box <future work>
 		langpanel = wx.Panel(mainpanel, -1)
 		langbox = wx.BoxSizer(wx.HORIZONTAL)
-		langlabel = wx.StaticText(langpanel, -1, 'Language:')
+		langlabel = wx.StaticText(langpanel, -1, u'Language:')
 		langcb = wx.ComboBox(langpanel, -1, size = (150, -1), choices = langchoices)
 		langcb.SetSelection(0)
 		langbox.Add(langlabel, 0, wx.ALL, 5)
@@ -107,14 +107,14 @@ class GUIWindow(wx.Frame):
 		self.Centre()
 
 	def OnConvert(self, e):
-		#dlg = wx.MessageDialog(self, message = ed2kConvert.ConvertLink(self.inputtext.GetLineText(0)), caption = 'Oops!', style = wx.OK)
+		#dlg = wx.MessageDialog(self, message = ed2kConvert.ConvertLink(self.inputtext.GetLineText(0)), caption = u'Oops!', style = wx.OK)
 		#dlg = wx.MessageDialog(self, message = self.inputtext.GetLineText(0), caption = str(self.inputtext.GetNumberOfLines()), style = wx.OK)
 		#dlg.ShowModal()
 		#dlg.Destroy()
 		#
 		self.resulttext.Clear()
-		for i in  range(self.inputtext.GetNumberOfLines()):
-			self.resulttext.write(ed2kConvert.ConvertLink(self.inputtext.GetLineText(i)) + '\n')
+		for i in range(self.inputtext.GetNumberOfLines()):
+			self.resulttext.write(ed2kConvert.ConvertLink(self.inputtext.GetLineText(i)) + u'\n')
 
 	def OnAbout(self, e):
 		""" Print Adout Dialog"""
@@ -124,21 +124,21 @@ class GUIWindow(wx.Frame):
 		#dlg.ShowModal()
 		#dlg.Destroy()
 		aboutdlginfo = wx.AboutDialogInfo()
-		aboutdlginfo.AddDeveloper('Wei-Jie Hsiao (a.k.a. RJ)')
-		aboutdlginfo.SetCopyright('Copyright @ 2010 Wei-Jie Hsiao')
+		aboutdlginfo.AddDeveloper(u'Wei-Jie Hsiao (a.k.a. RJ)')
+		aboutdlginfo.SetCopyright(u'Copyright @ 2010 Wei-Jie Hsiao')
 		#aboutdlginfo.SetIcon(self, self.Icon)
-		aboutdlginfo.SetLicence('licence GPL')
-		aboutdlginfo.SetName('ed2k Link Converter')
-		aboutdlginfo.SetVersion('version 0.1')
-		aboutdlginfo.SetWebSite('http:www.google.com.tw')
+		aboutdlginfo.SetLicence(u'licence GPL')
+		aboutdlginfo.SetName(u'ed2k Link Converter')
+		aboutdlginfo.SetVersion(u'version 0.1')
+		aboutdlginfo.SetWebSite(u'http:www.google.com.tw')
 		wx.AboutBox(aboutdlginfo)
 
 	def OnExit(self, e):
 		self.Close(True)
 
 def RunGUI():
-    app = wx.App()
-    GUIWindow(None, wx.ID_ANY).Show(True)
-    app.MainLoop()
+	app = wx.App()
+	GUIWindow(None, wx.ID_ANY).Show(True)
+	app.MainLoop()
 
 

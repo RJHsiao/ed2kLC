@@ -6,12 +6,18 @@
 # Version: 0.1
 
 ### Program Start
+import codecs
 import urllib
 import re
 
-def ConvertLink(srclink, destype = '', utf8url = True):
+filename = ''
+
+def ConvertLink(srclink, destype = u'', utf8url = True):
 	#
-	if srclink == '':
-		return ''
-	filename = srclink.split('|')[2]
-	return unicode('<a href="' + srclink + '">' + urllib.unquote_plus(filename) + '</a>')
+	if srclink == u'':
+		return u''
+	filename = urllib.unquote_plus(srclink.split(u'|')[2])
+	f = codecs.open(u'test.txt','w','utf_8')
+	f.write(filename + '\n')
+	f.close()
+	return unicode(u'<a href="' + srclink + u'">' + filename + u'</a>')
