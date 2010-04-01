@@ -114,7 +114,7 @@ class GUIWindow(wx.Frame):
 		#
 		self.resulttext.Clear()
 		for i in range(self.inputtext.GetNumberOfLines()):
-			self.resulttext.write(ed2kConvert.ConvertLink(self.inputtext.GetLineText(i)) + u'\n')
+			self.resulttext.write(ed2kConvert.ConvertLink(self.inputtext.GetLineText(i)) + '\n')
 
 	def OnAbout(self, e):
 		""" Print Adout Dialog"""
