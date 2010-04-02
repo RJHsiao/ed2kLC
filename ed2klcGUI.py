@@ -11,6 +11,7 @@ import ed2kConvert
 
 class GUIWindow(wx.Frame):
 	"""The GUI Window"""
+	
 	def __init__(self, parent, id):
 		## These variable are define for support multi-language in the future
 		Title = u'ed2k Link Converter'
@@ -24,7 +25,7 @@ class GUIWindow(wx.Frame):
 		convertbtnlabel = u'Convert'
 		aboutbtnlabel = u'About'
 		exitbtulabel = u'Exit'
-		langchoices = [u'English (en)']#,u'正體中文 (zh-TW)'] 
+		langchoices = [u'English (en)']#,u'正體中文 (zh-TW)']
 
 		Pos = wx.DefaultPosition
 		Size = (500,550)
@@ -114,7 +115,14 @@ class GUIWindow(wx.Frame):
 		#
 		self.resulttext.Clear()
 		for i in range(self.inputtext.GetNumberOfLines()):
-			self.resulttext.write(ed2kConvert.ConvertLink(self.inputtext.GetLineText(i)) + '\n')
+			result = ed2kConvert.ConvertLink(self.inputtext.GetLineText(i))
+			if result == None:
+				linknotmatch = u'Line {0} is not a regular ed2k file link!'
+				dlg = wx.MessageDialog(self, message = linknotmatch.format(i + 1), caption = u'Oops!', style = wx.OK)
+				dlg.ShowModal()
+				dlg.Destroy()
+			else:
+				self.resulttext.write(result + '\n')
 
 	def OnAbout(self, e):
 		""" Print Adout Dialog"""
