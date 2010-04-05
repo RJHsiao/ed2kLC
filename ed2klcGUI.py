@@ -2,8 +2,28 @@
 #-*- coding:utf-8 -*-
 # ed2k Link Converter - the GUI part
 # Auther Name: Wei-Jie Hsiao (a.k.a. RJ or RJ Hsiao, RJking, RJ-king)
-# Date: 2010/03/18
+# Date: 2010/04/05
 # Version: 0.1
+
+##########################################################################
+#                                 LICENSE                                #
+##########################################################################
+# This file is part of ed2k Link Converter.                              #
+#                                                                        #
+# ed2k Link Converter is free software: you can redistribute it          #
+# and/or modify it under the terms of the GNU General Public License     #
+# as published by the Free Software Foundation, either                   #
+# version 3 of the License, or (at your option) any later version.       #
+#                                                                        #
+# ed2k Link Converter is distributed in the hope that it will be useful, #
+# but WITHOUT ANY WARRANTY; without even the implied warranty of         #
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the          #
+# GNU General Public License for more details.                           #
+#                                                                        #
+# You should have received a copy of the GNU General Public License      #
+# along with ed2k Link Converter.  If not, see                           #
+# <http://www.gnu.org/licenses/>.                                        #
+##########################################################################
 
 ### Program Start
 import wx
@@ -14,131 +34,164 @@ class GUIWindow(wx.Frame):
 	
 	def __init__(self, parent, id):
 		## These variable are define for support multi-language in the future
-		Title = u'ed2k Link Converter'
-		inputlabel = u'Input Links'
-		optionlabel = u'Options'
-		taglabel = u'Tag Type'
-		tagchoices = [u'HTML',u'BBcode',u'No Tag']
-		formatlabel = u'UTF-8 url format' + u'?'
-		formatchoices = [u'Yes',u'No']
-		resultlabel = u'Result Links'
-		convertbtnlabel = u'Convert'
-		aboutbtnlabel = u'About'
-		exitbtulabel = u'Exit'
-		langchoices = [u'English (en)']#,u'正體中文 (zh-TW)']
+		self.title = u'ed2k Link Converter'
+		self.inputLabel = u'Input Links'
+		self.optionLabel = u'Options'
+		self.tagLabel = u'Tag Type'
+		self.tagChoices = [u'No Tag', u'HTML', u'BBcode']
+		self.isUTF8URL_Label = u'UTF-8 url format?'
+		self.isUTF8URL_Choices = [u'Yes',u'No']
+		self.resultLabel = u'Converted Links'
+		self.cleanBtnLabel = u'Clean'
+		self.convertBtnLabel = u'Convert'
+		self.aboutBtnLabel = u'About'
+		self.exitBtuLabel = u'Exit'
+		self.langChoices = [u'English (en)',u'正體中文 (zh-TW)']
+		self.linkNotMatchMsg = u'Line {0} is not a regular ed2k file link!'
+		self.noticeDlgCaption = u'Oops!'
+		self.convertFinMsg = u'Convert Finished'
 
-		Pos = wx.DefaultPosition
-		Size = (500,550)
+		POS = wx.DefaultPosition
+		SIZE = (500,550)
 		Style = wx.MINIMIZE_BOX | wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX
-		#self.Icon = wx.Icon(u'icon', wx.BITMAP_TYPE_ICO)
-		#self.Icon.CopyFromBitmap(self,wx.Image(u'ed2klc.ico', wx.BITMAP_TYPE_ICO).ConvertToBitmap())
-		wx.Frame.__init__(self, parent, id, title = Title, pos = Pos, size = Size, style = Style)
+		wx.Frame.__init__(self, parent, id, title = self.title, pos = POS, size = SIZE, style = Style)
+		self.Icon = wx.Icon(u'ed2klc.ico', wx.BITMAP_TYPE_ICO)
+		self.SetIcon(self.Icon)
 
-		gobalpanel = wx.Panel(self, -1)
-		gobalbox = wx.BoxSizer(wx.HORIZONTAL)
+		gobalPanel = wx.Panel(self, -1)
+		gobalBox = wx.BoxSizer(wx.HORIZONTAL)
 
 		## Main area, contain input text box, option radio boxs and result (output) Text Box
-		mainpanel = wx.Panel(gobalpanel,-1)
-		mainbox = wx.BoxSizer(wx.VERTICAL)
+		mainPanel = wx.Panel(gobalPanel,-1)
+		mainBox = wx.BoxSizer(wx.VERTICAL)
 
 		## The area that contain input text box 
-		inputpanel = wx.Panel(mainpanel, -1)
-		inputbox = wx.StaticBoxSizer(wx.StaticBox(inputpanel, -1, inputlabel), orient = wx.VERTICAL)
-		self.inputtext = wx.TextCtrl(inputpanel, -1, size = (350, 150), style = wx.TE_MULTILINE | wx.HSCROLL)
-		inputbox.Add(self.inputtext, 0, wx.ALL, 5)
-		inputpanel.SetSizer(inputbox)
-		mainbox.Add(inputpanel, 0, wx.EXPAND | wx.ALL, 5)
+		inputPanel = wx.Panel(mainPanel, -1)
+		inputBox = wx.StaticBoxSizer(wx.StaticBox(inputPanel, -1, self.inputLabel), orient = wx.VERTICAL)
+		self.inputText = wx.TextCtrl(inputPanel, -1, size = (350, 150), style = wx.TE_MULTILINE | wx.HSCROLL)
+		inputBox.Add(self.inputText, 0, wx.ALL, 5)
+		inputPanel.SetSizer(inputBox)
+		mainBox.Add(inputPanel, 0, wx.EXPAND | wx.ALL, 5)
 
 		## The area that contain option radio boxs
-		optionpanel = wx.Panel(mainpanel, -1)
-		optionbox = wx.StaticBoxSizer(wx.StaticBox(optionpanel, -1, optionlabel), orient = wx.HORIZONTAL)
-		self.tagrb = wx.RadioBox(optionpanel, -1, label = taglabel, choices = tagchoices)
-		optionbox.Add(self.tagrb, 0, wx.ALL, 5)
-		self.formatrb = wx.RadioBox(optionpanel, -1, label = formatlabel, choices = formatchoices)
-		optionbox.Add(self.formatrb, 0, wx.ALL, 5)
-		optionpanel.SetSizer(optionbox)
-		mainbox.Add(optionpanel, 0, wx.EXPAND | wx.ALL, 5)
+		optionPanel = wx.Panel(mainPanel, -1)
+		optionBox = wx.StaticBoxSizer(wx.StaticBox(optionPanel, -1, self.optionLabel), orient = wx.HORIZONTAL)
+		self.tagRB = wx.RadioBox(optionPanel, -1, label = self.tagLabel, choices = self.tagChoices)
+		optionBox.Add(self.tagRB, 0, wx.ALL, 5)
+		self.isUTF8URL_RB = wx.RadioBox(optionPanel, -1, label = self.isUTF8URL_Label, choices = self.isUTF8URL_Choices)
+		optionBox.Add(self.isUTF8URL_RB, 0, wx.ALL, 5)
+		optionPanel.SetSizer(optionBox)
+		mainBox.Add(optionPanel, 0, wx.EXPAND | wx.ALL, 5)
 
 		## The area that contain result (output) text box
-		resultpanel = wx.Panel(mainpanel, -1)
-		resultbox = wx.StaticBoxSizer(wx.StaticBox(resultpanel, -1, resultlabel), orient = wx.VERTICAL)
-		self.resulttext = wx.TextCtrl(resultpanel, -1, size = (350, 150), style = wx.TE_MULTILINE)
-		resultbox.Add(self.resulttext, 0, wx.ALL, 5)
-		resultpanel.SetSizer(resultbox)
-		mainbox.Add(resultpanel, 0, wx.EXPAND | wx.ALL, 5)
+		resultPanel = wx.Panel(mainPanel, -1)
+		resultBox = wx.StaticBoxSizer(wx.StaticBox(resultPanel, -1, self.resultLabel), orient = wx.VERTICAL)
+		self.resultText = wx.TextCtrl(resultPanel, -1, size = (350, 150), style = wx.TE_MULTILINE)
+		resultBox.Add(self.resultText, 0, wx.ALL, 5)
+		resultPanel.SetSizer(resultBox)
+		mainBox.Add(resultPanel, 0, wx.EXPAND | wx.ALL, 5)
 
 		## The area that contain languade select combo box <future work>
-		langpanel = wx.Panel(mainpanel, -1)
-		langbox = wx.BoxSizer(wx.HORIZONTAL)
-		langlabel = wx.StaticText(langpanel, -1, u'Language:')
-		langcb = wx.ComboBox(langpanel, -1, size = (150, -1), choices = langchoices)
-		langcb.SetSelection(0)
-		langbox.Add(langlabel, 0, wx.ALL, 5)
-		langbox.Add(langcb, 0, wx.ALL, 5)
-		langpanel.SetSizer(langbox)
-		mainbox.Add(langpanel, 0, wx.EXPAND | wx.ALL, 5)
+		langPanel = wx.Panel(mainPanel, -1)
+		langBox = wx.BoxSizer(wx.HORIZONTAL)
+		langLabel = wx.StaticText(langPanel, -1, u'Language:')
+		self.langCB = wx.ComboBox(langPanel, -1, size = (150, -1), choices = self.langChoices, style = wx.CB_READONLY)
+		self.langCB.SetSelection(0)
+		self.Bind(wx.EVT_TEXT, self.OnChangeLang, id = self.langCB.GetId())
+		langBox.Add(langLabel, 0, wx.ALL, 5)
+		langBox.Add(self.langCB, 0, wx.ALL, 5)
+		langPanel.SetSizer(langBox)
+		mainBox.Add(langPanel, 0, wx.EXPAND | wx.ALL, 5)
 
-		mainpanel.SetSizer(mainbox)
-		gobalbox.Add(mainpanel, 0, wx.EXPAND | wx.ALL, 5)
+		mainPanel.SetSizer(mainBox)
+		gobalBox.Add(mainPanel, 0, wx.EXPAND | wx.ALL, 5)
 
 		## The area that contain all buttons
-		buttonpanel = wx.Panel(gobalpanel, -1)
-		buttonbox = wx.BoxSizer(wx.VERTICAL)
-		btnsize = (50, 30)
+		buttonPanel = wx.Panel(gobalPanel, -1)
+		buttonBox = wx.BoxSizer(wx.VERTICAL)
+		BTNSIZE = (50, 30)
 
 		## The Convert Button
-		convertbtn = wx.Button(buttonpanel, -1, convertbtnlabel,)
-		buttonbox.Add(convertbtn, 0, wx.ALL, 5)
-		self.Bind(wx.EVT_BUTTON, self.OnConvert, id = convertbtn.GetId())
+		convertBtn = wx.Button(buttonPanel, -1, self.convertBtnLabel,)
+		buttonBox.Add(convertBtn, 0, wx.ALL, 5)
+		self.Bind(wx.EVT_BUTTON, self.OnConvert, id = convertBtn.GetId())
+
+		## The Clean Button
+		cleanBtn = wx.Button(buttonPanel, -1, self.cleanBtnLabel,)
+		buttonBox.Add(cleanBtn, 0, wx.ALL, 5)
+		self.Bind(wx.EVT_BUTTON, self.OnClean, id = cleanBtn.GetId())
 
 		## The About Button
-		aboutbtn = wx.Button(buttonpanel, -1, aboutbtnlabel, btnsize)
-		buttonbox.Add(aboutbtn, 0, wx.ALL, 5)
-		self.Bind(wx.EVT_BUTTON, self.OnAbout, id = aboutbtn.GetId())
+		aboutBtn = wx.Button(buttonPanel, -1, self.aboutBtnLabel, BTNSIZE)
+		buttonBox.Add(aboutBtn, 0, wx.ALL, 5)
+		self.Bind(wx.EVT_BUTTON, self.OnAbout, id = aboutBtn.GetId())
 
 		## The Exit Button
-		exitbtn = wx.Button(buttonpanel, -1, exitbtulabel, btnsize)
-		buttonbox.Add(exitbtn, 0, wx.ALL, 5)
-		self.Bind(wx.EVT_BUTTON, self.OnExit, id = exitbtn.GetId())
+		exitBtn = wx.Button(buttonPanel, -1, self.exitBtuLabel, BTNSIZE)
+		buttonBox.Add(exitBtn, 0, wx.ALL, 5)
+		self.Bind(wx.EVT_BUTTON, self.OnExit, id = exitBtn.GetId())
 
-		buttonpanel.SetSizer(buttonbox)
-		gobalbox.Add(buttonpanel, 0, wx.EXPAND | wx.ALL, 5)
+		buttonPanel.SetSizer(buttonBox)
+		gobalBox.Add(buttonPanel, 0, wx.EXPAND | wx.ALL, 5)
 
-		gobalpanel.SetSizer(gobalbox)
+		gobalPanel.SetSizer(gobalBox)
 		self.Centre()
 
 	def OnConvert(self, e):
-		#dlg = wx.MessageDialog(self, message = ed2kConvert.ConvertLink(self.inputtext.GetLineText(0)), caption = u'Oops!', style = wx.OK)
-		#dlg = wx.MessageDialog(self, message = self.inputtext.GetLineText(0), caption = str(self.inputtext.GetNumberOfLines()), style = wx.OK)
-		#dlg.ShowModal()
-		#dlg.Destroy()
-		#
-		self.resulttext.Clear()
-		for i in range(self.inputtext.GetNumberOfLines()):
-			result = ed2kConvert.ConvertLink(self.inputtext.GetLineText(i))
+		""" Convert ed2k link """
+		self.resultText.Clear()
+		for i in range(self.inputText.GetNumberOfLines()):
+			result = ed2kConvert.ConvertLink(\
+				inputLink = self.inputText.GetLineText(i),\
+				desType = self.tagRB.GetSelection(),\
+				isUTF8URL = not bool(self.isUTF8URL_RB.GetSelection()))
 			if result == None:
-				linknotmatch = u'Line {0} is not a regular ed2k file link!'
-				dlg = wx.MessageDialog(self, message = linknotmatch.format(i + 1), caption = u'Oops!', style = wx.OK)
+				dlg = wx.MessageDialog(self, message = self.linkNotMatchMsg.format(i + 1), caption = self.noticeDlgCaption, style = wx.OK)
 				dlg.ShowModal()
 				dlg.Destroy()
+				return False
 			else:
-				self.resulttext.write(result + '\n')
+				self.resultText.write(result)
+		dlg = wx.MessageDialog(self, message = self.convertFinMsg, caption = self.title, style = wx.OK)
+		dlg.ShowModal()
+		dlg.Destroy()
+
+	def OnChangeLang(self, e):
+		""" Change GUI Language """
+		dlg = wx.MessageDialog(self, message=u'This feature is not finished yet...', caption= self.noticeDlgCaption, style = wx.OK)
+		dlg.ShowModal()
+		dlg.Destroy()
+		self.langCB.SetSelection(0)
+
+	def OnClean(self, e):
+		""" Clean up input & result text area """
+		self.inputText.Clear()
+		self.resultText.Clear()
 
 	def OnAbout(self, e):
-		""" Print Adout Dialog"""
-		#AboutMsg = "ed2k Link Converter \n in wxPython"
-		#AboutTitle = "About ed2k Link Converter"
-		#dlg = wx.MessageDialog(self, AboutMsg, AboutTitle, wx.OK)
-		#dlg.ShowModal()
-		#dlg.Destroy()
+		""" Print Adout Dialog """
 		aboutdlginfo = wx.AboutDialogInfo()
 		aboutdlginfo.AddDeveloper(u'Wei-Jie Hsiao (a.k.a. RJ)')
 		aboutdlginfo.SetCopyright(u'Copyright @ 2010 Wei-Jie Hsiao')
-		#aboutdlginfo.SetIcon(self, self.Icon)
-		aboutdlginfo.SetLicence(u'licence GPL')
+		aboutdlginfo.SetIcon(self.Icon)
+		aboutdlginfo.SetLicence(u"""
+ed2k Link Converter - a ed2k tag and link-format converter.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.""")
 		aboutdlginfo.SetName(u'ed2k Link Converter')
-		aboutdlginfo.SetVersion(u'version 0.1')
-		aboutdlginfo.SetWebSite(u'http:www.google.com.tw')
+		aboutdlginfo.SetVersion(u'v0.1')
+		aboutdlginfo.SetWebSite(u'http://github.com/RJking/ed2kLC')
 		wx.AboutBox(aboutdlginfo)
 
 	def OnExit(self, e):
@@ -148,5 +201,3 @@ def RunGUI():
 	app = wx.App()
 	GUIWindow(None, wx.ID_ANY).Show(True)
 	app.MainLoop()
-
-

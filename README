@@ -1,0 +1,29 @@
+ed2kLC - the ed2k Link Converter is a simple GUI program for convert ed2k 
+link between without tag, HTML tag and BBcode tag that we usually post it 
+on the forum and web. The ed2k Link Converter also can convert ed2k link 
+between useing UTF-8 (ex: %E4%B8%AD) format and Unicode / MBCS that you can 
+see it clearly (ex: ¤¤). You can run it on Unix-like system and Windows.
+
+In this Program, you'll see those file:
+  ed2klc.py:
+    The main entry point that will call ed2klcGUI.py
+
+  ed2klcGUI.py:
+    The GUI part. This file contain all of GUI unit.
+
+  ed2kConvert.py:
+    The Converter part. It can be an independent module.
+
+  ed2klc.ico:
+    The program's icon.
+
+How to use?
+first, you have to check that your computer is already install python 2.x
+(python 2.6 is recommend), and than, run ed2klc.py. If ed2klc.py is runing
+correctly, you will see an GUI.
+After that, insert ed2k link(s) into input text area and click 'Convert'
+button, if the link(s) that you insert is/are legal, you will see a dialog
+notify you convert finished and you can see the converted link in converted
+text area. If you insert an illegal ed2k file link, it will stop convert
+directly and you can't see the converted link in converted text area.
+You can clean input & converted link area with click 'Clean' Button.
