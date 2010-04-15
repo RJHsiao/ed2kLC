@@ -62,7 +62,7 @@ def ConvertLink(inputLink, desType = NOTAG, isUTF8URL = True):
 	returnStr = ''
 	for ed2kLink in detectLink:
 		if isUTF8URL is True:
-			srcLink = urllib.quote(ed2kLink[0], ed2kQuoteSafe)
+			srcLink = urllib.quote(ed2kLink[0].encode('utf_8'), ed2kQuoteSafe)
 		else:
 			srcLink = urllib.unquote(ed2kLink[0].encode('utf_8'))
 		if desType is TAG_BBCODE:
