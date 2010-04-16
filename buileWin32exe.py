@@ -33,7 +33,7 @@ includes = ['encodings', 'encodings.*']
 
 setup(name='ed2kLC',
 		description = 'ed2k Link Converter',
-		version = '0.1',
+		version = '0.1.1',
 		data_files=[('', ['ed2klc.ico'])],
 		windows = [{'script' : 'ed2klc.py', 'icon_resources' : [(1, 'ed2klc.ico')]}],
 		zipfile = None,

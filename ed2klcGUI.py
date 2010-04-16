@@ -183,13 +183,14 @@ class GUIWindow(wx.Frame):
 								u"version 3 of the License, or (at your option) any later version.\n\n" + \
 								u"This program is distributed in the hope that it will be useful,\n" + \
 								u"but WITHOUT ANY WARRANTY; without even the implied\n" + \
-								u"warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR\n" + \
-								u"PURPOSE. See the GNU General Public License for more details.\n\n" + \
+								u"warranty of MERCHANTABILITY or FITNESS FOR A\n" + \
+								u"PARTICULAR PURPOSE. See the GNU General Public License\n" + \
+								u"for more details.\n\n" + \
 								u"You should have received a copy of the GNU General Public\n" + \
 								u"License along with this program. If not, see\n" + \
 								u"<http://www.gnu.org/licenses/>.")
 		aboutdlginfo.SetName(u'ed2k Link Converter')
-		aboutdlginfo.SetVersion(u'v0.1')
+		aboutdlginfo.SetVersion(u'v0.1.1')
 		aboutdlginfo.SetWebSite(u'http://github.com/RJking/ed2kLC')
 		wx.AboutBox(aboutdlginfo)
 
