@@ -28,6 +28,7 @@
 ### Program Start
 import wx
 import ed2kConvert
+import ed2klcIcon
 
 class GUIWindow(wx.Frame):
 	"""The GUI Window"""
@@ -55,7 +56,8 @@ class GUIWindow(wx.Frame):
 		SIZE = (500,550)
 		Style = wx.MINIMIZE_BOX | wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX
 		wx.Frame.__init__(self, parent, id, title = self.title, pos = POS, size = SIZE, style = Style)
-		self.Icon = wx.Icon(u'ed2klc.ico', wx.BITMAP_TYPE_ICO)
+		#self.Icon = wx.Icon(u'ed2klc.ico', wx.BITMAP_TYPE_ICO)
+		self.Icon = ed2klcIcon.getIconIcon()
 		self.SetIcon(self.Icon)
 
 		gobalPanel = wx.Panel(self, -1)
@@ -174,21 +176,17 @@ class GUIWindow(wx.Frame):
 		aboutdlginfo.AddDeveloper(u'Wei-Jie Hsiao (a.k.a. RJ)')
 		aboutdlginfo.SetCopyright(u'Copyright @ 2010 Wei-Jie Hsiao')
 		aboutdlginfo.SetIcon(self.Icon)
-		aboutdlginfo.SetLicence(u"""
-ed2k Link Converter - a ed2k tag and link-format converter.
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program. If not, see <http://www.gnu.org/licenses/>.""")
+		aboutdlginfo.SetLicence(u"ed2k Link Converter - a ed2k tag and link-format converter.\n\n" + \
+								u"This program is free software: you can redistribute it and/or modify " + \
+								u"it under the terms of the GNU General Public License as published by " + \
+								u"the Free Software Foundation, either version 3 of the License, or " + \
+								u"(at your option) any later version.\n\n" + \
+								u"This program is distributed in the hope that it will be useful, " + \
+								u"but WITHOUT ANY WARRANTY; without even the implied warranty of " + \
+								u"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the " + \
+								u"GNU General Public License for more details.\n\n" + \
+								u"You should have received a copy of the GNU General Public License " + \
+								u"along with this program. If not, see <http://www.gnu.org/licenses/>.")
 		aboutdlginfo.SetName(u'ed2k Link Converter')
 		aboutdlginfo.SetVersion(u'v0.1')
 		aboutdlginfo.SetWebSite(u'http://github.com/RJking/ed2kLC')
