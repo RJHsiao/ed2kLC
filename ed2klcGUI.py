@@ -177,16 +177,17 @@ class GUIWindow(wx.Frame):
 		aboutdlginfo.SetCopyright(u'Copyright @ 2010 Wei-Jie Hsiao')
 		aboutdlginfo.SetIcon(self.Icon)
 		aboutdlginfo.SetLicence(u"ed2k Link Converter - a ed2k tag and link-format converter.\n\n" + \
-								u"This program is free software: you can redistribute it and/or modify " + \
-								u"it under the terms of the GNU General Public License as published by " + \
-								u"the Free Software Foundation, either version 3 of the License, or " + \
-								u"(at your option) any later version.\n\n" + \
-								u"This program is distributed in the hope that it will be useful, " + \
-								u"but WITHOUT ANY WARRANTY; without even the implied warranty of " + \
-								u"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the " + \
-								u"GNU General Public License for more details.\n\n" + \
-								u"You should have received a copy of the GNU General Public License " + \
-								u"along with this program. If not, see <http://www.gnu.org/licenses/>.")
+								u"This program is free software: you can redistribute it and/or\n" + \
+								u"modify it under the terms of the GNU General Public License\n" + \
+								u"as published by the Free Software Foundation, either\n" + \
+								u"version 3 of the License, or (at your option) any later version.\n\n" + \
+								u"This program is distributed in the hope that it will be useful,\n" + \
+								u"but WITHOUT ANY WARRANTY; without even the implied\n" + \
+								u"warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR\n" + \
+								u"PURPOSE. See the GNU General Public License for more details.\n\n" + \
+								u"You should have received a copy of the GNU General Public\n" + \
+								u"License along with this program. If not, see\n" + \
+								u"<http://www.gnu.org/licenses/>.")
 		aboutdlginfo.SetName(u'ed2k Link Converter')
 		aboutdlginfo.SetVersion(u'v0.1')
 		aboutdlginfo.SetWebSite(u'http://github.com/RJking/ed2kLC')
