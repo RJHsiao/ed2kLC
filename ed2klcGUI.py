@@ -56,15 +56,13 @@ class GUIWindow(wx.Frame):
 		SIZE = (500,550)
 		Style = wx.MINIMIZE_BOX | wx.SYSTEM_MENU | wx.CAPTION | wx.CLOSE_BOX
 		wx.Frame.__init__(self, parent, id, title = self.title, pos = POS, size = SIZE, style = Style)
-		#self.Icon = wx.Icon(u'ed2klc.ico', wx.BITMAP_TYPE_ICO)
 		self.Icon = ed2klcIcon.getIconIcon()
 		self.SetIcon(self.Icon)
 
-		gobalPanel = wx.Panel(self, -1)
-		gobalBox = wx.BoxSizer(wx.HORIZONTAL)
+		self.globalBox = wx.BoxSizer(wx.HORIZONTAL)
 
 		## Main area, contain input text box, option radio boxs and result (output) Text Box
-		mainPanel = wx.Panel(gobalPanel,-1)
+		mainPanel = wx.Panel(self,-1)
 		mainBox = wx.BoxSizer(wx.VERTICAL)
 
 		## The area that contain input text box 
@@ -106,10 +104,10 @@ class GUIWindow(wx.Frame):
 		mainBox.Add(langPanel, 0, wx.EXPAND | wx.ALL, 5)
 
 		mainPanel.SetSizer(mainBox)
-		gobalBox.Add(mainPanel, 0, wx.EXPAND | wx.ALL, 5)
+		self.globalBox.Add(mainPanel, 0, wx.EXPAND | wx.ALL, 5)
 
 		## The area that contain all buttons
-		buttonPanel = wx.Panel(gobalPanel, -1)
+		buttonPanel = wx.Panel(self, -1)
 		buttonBox = wx.BoxSizer(wx.VERTICAL)
 		BTNSIZE = (50, 30)
 
@@ -134,9 +132,10 @@ class GUIWindow(wx.Frame):
 		self.Bind(wx.EVT_BUTTON, self.OnExit, id = exitBtn.GetId())
 
 		buttonPanel.SetSizer(buttonBox)
-		gobalBox.Add(buttonPanel, 0, wx.EXPAND | wx.ALL, 5)
+		self.globalBox.Add(buttonPanel, 0, wx.EXPAND | wx.ALL, 5)
 
-		gobalPanel.SetSizer(gobalBox)
+		self.SetSizer(self.globalBox)
+		self.globalBox.SetSizeHints(self)
 		self.Centre()
 
 	def OnConvert(self, e):
