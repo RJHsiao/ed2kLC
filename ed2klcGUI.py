@@ -59,10 +59,11 @@ class GUIWindow(wx.Frame):
 		self.Icon = ed2klcIcon.getIconIcon()
 		self.SetIcon(self.Icon)
 
+		self.globalPanel = wx.Panel(self,-1)
 		self.globalBox = wx.BoxSizer(wx.HORIZONTAL)
 
 		## Main area, contain input text box, option radio boxs and result (output) Text Box
-		mainPanel = wx.Panel(self,-1)
+		mainPanel = wx.Panel(self.globalPanel,-1)
 		mainBox = wx.BoxSizer(wx.VERTICAL)
 
 		## The area that contain input text box 
@@ -107,7 +108,7 @@ class GUIWindow(wx.Frame):
 		self.globalBox.Add(mainPanel, 0, wx.EXPAND | wx.ALL, 5)
 
 		## The area that contain all buttons
-		buttonPanel = wx.Panel(self, -1)
+		buttonPanel = wx.Panel(self.globalPanel, -1)
 		buttonBox = wx.BoxSizer(wx.VERTICAL)
 		BTNSIZE = (50, 30)
 
@@ -134,7 +135,8 @@ class GUIWindow(wx.Frame):
 		buttonPanel.SetSizer(buttonBox)
 		self.globalBox.Add(buttonPanel, 0, wx.EXPAND | wx.ALL, 5)
 
-		self.SetSizer(self.globalBox)
+		self.globalPanel.SetSizer(self.globalBox)
+		#self.SetSizer(self.globalBox)
 		self.globalBox.SetSizeHints(self)
 		self.Centre()
 
