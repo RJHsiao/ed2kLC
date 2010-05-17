@@ -191,7 +191,7 @@ class GUIWindow(wx.Frame):
 								u"License along with this program. If not, see\n" + \
 								u"<http://www.gnu.org/licenses/>.")
 		aboutdlginfo.SetName(u'ed2k Link Converter')
-		aboutdlginfo.SetVersion(u'v0.1.1')
+		aboutdlginfo.SetVersion(u'v0.1')
 		aboutdlginfo.SetWebSite(u'http://github.com/RJking/ed2kLC')
 		wx.AboutBox(aboutdlginfo)
 
