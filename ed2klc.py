@@ -5,8 +5,8 @@
 #	1.UTF-8 <-> MBCS / Unicode charactor you can read
 #	2.add / remove the html / BBcode tag
 # Auther Name: Wei-Jie Hsiao (a.k.a. RJ or RJ Hsiao, RJking, RJ-king)
-# Date: 2010/04/05
-# Version: 0.1
+# Date: 2010/12/17
+# Version: 1.0
 
 ##########################################################################
 #                                 LICENSE                                #

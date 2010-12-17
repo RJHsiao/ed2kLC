@@ -1,8 +1,37 @@
 ed2kLC - the ed2k Link Converter is a simple GUI program for convert ed2k 
 link between without tag, HTML tag and BBcode tag that we usually post it 
 on the forum and web. The ed2k Link Converter also can convert ed2k link 
-between useing UTF-8 (ex: %E4%B8%AD) format and Unicode / MBCS that you can 
-see it clearly (ex: ��). You can run it on Unix-like system and Windows.
+between with UTF-8 encode (ex: "%E4%B8%AD%20%E4%B8%AD") and without UTF-8 
+encode that you can see it clearly (ex: "中 中"). You can run it on
+Unix-like system and Windows.
+
+Feture:
+  1. Detect ed2k links and convert.
+     That means, it will work fine even there are more then one regular
+     ed2k links. If there is not any regular ed2k link in non-empty line
+     and there are regular ed2k links in the other line, the program will
+     remember the line number, continue to convert, and tell you the
+     number(s) at last.
+
+  2. Convert links between with html tag, BBcode tag, and without tag.
+     In fact, the program will only catch the part of string that matched
+     with the regex of regular ed2k link, then you can choose whitch
+     outputyou want:
+
+     a. html tag. Just a simple hyperlink markup like
+        <a href="{link}">{name}</a>
+
+     b. BBcode tag. It almost used in many message boards. Looks like:
+        [url={link}]{name}[/url]
+
+     c. No tag, just only ed2k links.
+
+  3. Convert links between with UTF-8 encode (ex: "%E4%B8%AD%20%E4%B8%AD")
+     and without UTF-8 encode that you can see it clearly (ex: "中 中").
+     In most case, using the links with UTF-8 encode is recommand and it's
+     the default setting in this program.
+
+  4. Copy the converted links into the system clipboard automatically.
 
 In this Program, you'll see those file:
   ed2klc.py:
@@ -14,16 +43,33 @@ In this Program, you'll see those file:
   ed2kConvert.py:
     The Converter part. It can be an independent module.
 
-  ed2klc.ico:
+  ed2klc.ico & ed2klcIcon.py:
     The program's icon.
 
+  ed2klc.ico & ed2klcIcon.py:
+    The program's icon.
+
+  buildWin32exe.py & ed2klc-win.ico:
+    The script and icon to build Win32 executable file.
+
+  License:
+    The file about the License.
+
+  README:
+    This file.
+
 How to use?
-first, you have to check that your computer is already install python 2.x
-(python 2.6 is recommend), and than, run ed2klc.py. If ed2klc.py is runing
-correctly, you will see an GUI.
-After that, insert ed2k link(s) into input text area and click 'Convert'
-button, if the link(s) that you insert is/are legal, you will see a dialog
-notify you convert finished and you can see the converted link in converted
-text area. If you insert an illegal ed2k file link, it will stop convert
-directly and you can't see the converted link in converted text area.
-You can clean input & converted link area with click 'Clean' Button.
+  First, you have to check that your computer is already install python
+  2.x (2.6.6 & 2.7.x is recommend) and wxPython(2.8.x is recommend). Than,
+  run ed2klc.py, you will see an window. For Windows user, you can download
+  the Win32 executable file and run it.
+
+  After the Window is open, insert ed2k link(s) into input text area and
+  click 'Convert' button or press Shift+Enter (or Shift+Return), you will
+  see a dialog to notify the process is finished if you already paste at 
+  least one regular ed2k file link in the input text area. You can see
+  the converted link in converted text area, and the converted link will
+  be copyed into the system clipboard automatically. If there is not any
+  regular ed2k file link in a line, you will also see a dialog about the
+  error. You can clear input & converted link area with click 'Clear'
+  button.

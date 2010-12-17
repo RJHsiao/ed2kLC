@@ -2,8 +2,8 @@
 #-*- coding:utf-8 -*-
 # ed2k Link Converter - the Convert part
 # Auther Name: Wei-Jie Hsiao (a.k.a. RJ or RJ Hsiao, RJking, RJ-king)
-# Date: 2010/04/05
-# Version: 0.1
+# Date: 2010/12/17
+# Version: 1.0
 
 ##########################################################################
 #                                 LICENSE                                #
@@ -55,7 +55,7 @@ def ConvertLink(inputLink, desType = NOTAG, isUTF8URL = True):
 	ConvertLink(inputLink, desType = ed2kConvert.NOTAG, utf8url = True)
 	"""
 	if inputLink == '':
-		return '\n'
+		return ''
 	detectLink = ed2kFileLinkRegex.findall(inputLink)
 	if detectLink == []:
 		return None

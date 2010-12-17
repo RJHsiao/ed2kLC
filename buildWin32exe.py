@@ -2,8 +2,8 @@
 #-*- coding:utf-8 -*-
 # ed2k Link Converter - the Windoes execute file builder part
 # Auther Name: Wei-Jie Hsiao (a.k.a. RJ or RJ Hsiao, RJking, RJ-king)
-# Date: 2010/04/05
-# Version: 0.1
+# Date: 2010/12/17
+# Version: 1.0
 
 ##########################################################################
 #                                 LICENSE                                #
@@ -31,14 +31,15 @@ import py2exe
 
 includes = ['encodings', 'encodings.*']
 
-setup(name='ed2kLC',
-		description = 'ed2k Link Converter',
-		version = '0.1.1',
-		data_files=[('', ['ed2klc.ico'])],
-		windows = [{'script' : 'ed2klc.py', 'icon_resources' : [(1, 'ed2klc.ico')]}],
-		zipfile = None,
-		options = {'py2exe':{'compressed' : 2,
-								'optimize' : 2,
-								'bundle_files' : 1,
-								'ascii' : False,
-								'includes' : includes,}})
+setup(name = 'ed2kLC',
+	description = 'ed2k Link Converter',
+	version = '1.0',
+	author = 'Wei-Jie Hsiao (a.k.a. RJ)',
+	url = 'http://github.com/RJking/ed2kLC',
+	windows = ['ed2klc.py', {'script' : 'ed2klc.py', 'icon_resources' : [(1, 'ed2klc-win.ico')]}],
+	zipfile = None,
+	options = {'py2exe':{'compressed' : 2,
+							'optimize' : 2,
+							'bundle_files' : 1,
+							'ascii' : False,
+							'includes' : includes,}})
